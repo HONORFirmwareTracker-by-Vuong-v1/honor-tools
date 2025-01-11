@@ -17,12 +17,12 @@ worker() {
     for i in `seq $end -1 $start`; do
         echo "Getting v${i}";
         path="$d2/v${i}_filelist.xml"
-        ls "${path}" || wget -O "${path}" http://update.hihonorcdn.com/TDS/data/bl/files/v$i/f1/full/filelist.xml
+        ls "${path}" || wget -O "${path}" http://update.hihonorcdn.com/TDS/data/bl/files/v$i/f1/full/filelist.xml -o /dev/null
         if ! (grep '<packageType>' "${path}"); then
             rm -f "${path}"
         fi
         path="$d2/v${i}_changelog.xml"
-        ls "${path}" || wget -O "${path}" http://update.hihonorcdn.com/TDS/data/bl/files/v$i/f1/changelog.xml
+        ls "${path}" || wget -O "${path}" http://update.hihonorcdn.com/TDS/data/bl/files/v$i/f1/changelog.xml -o /dev/null
         if ! (grep '<language' "${path}"); then
             rm -f "${path}"
         fi
