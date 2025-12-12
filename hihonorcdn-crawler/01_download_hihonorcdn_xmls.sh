@@ -4,7 +4,7 @@
 # stores those files into update_hihonorcdn_com_all_* directory for further processing
 
 from=680000
-to=720000
+to=740000
 
 d="update_hihonorcdn_com_all_$from-$to"
 
