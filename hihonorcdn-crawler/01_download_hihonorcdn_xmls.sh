@@ -17,12 +17,12 @@ worker() {
     for i in `seq $end -1 $start`; do
         echo "Getting v${i}";
         path="$d2/v${i}_filelist.xml"
-        ls "${path}" || curl -so "${path}" http://update.hihonorcdn.com/TDS/data/bl/files/v$i/f1/full/filelist.xml
+        ls "${path}" || curl -A "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 OPR/126.0.0.0" -so "${path}" http://update.hihonorcdn.com/TDS/data/bl/files/v$i/f1/full/filelist.xml
         if ! (grep '<packageType>' "${path}"); then
             rm -f "${path}"
         fi
         path="$d2/v${i}_changelog.xml"
-        ls "${path}" || curl -so "${path}" http://update.hihonorcdn.com/TDS/data/bl/files/v$i/f1/changelog.xml
+        ls "${path}" || curl -A "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 OPR/126.0.0.0" -so "${path}" http://update.hihonorcdn.com/TDS/data/bl/files/v$i/f1/changelog.xml
         if ! (grep '<language' "${path}"); then
             rm -f "${path}"
         fi
