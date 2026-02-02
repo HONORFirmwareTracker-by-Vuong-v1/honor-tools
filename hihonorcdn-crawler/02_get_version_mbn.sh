@@ -4,7 +4,7 @@
 # zip files tails in parallel to get VERSION.mbn which contains the actual version of the update
 #
 # Usage:
-# $ ./get_version_mbn.sh update_hihonorcdn_com_all_700000-760000
+# $ ./get_version_mbn.sh update_hihonorcdn_com_all_720000-760000
 
 SEARCH_DIR="$1"
 [ "x$SEARCH_DIR" != 'x' ] || exit 1
