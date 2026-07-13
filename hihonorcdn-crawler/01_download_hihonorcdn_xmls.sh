@@ -3,8 +3,8 @@
 # Script tries to find all update files on update.hihonorcdn.com (filelist.xml) and
 # stores those files into update_hihonorcdn_com_all_* directory for further processing
 
-from=800000
-to=860000
+from=840000
+to=900000
 
 d="update_hihonorcdn_com_all_$from-$to"
 
