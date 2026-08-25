@@ -21,8 +21,8 @@ worker() {
             continue
         fi
         version=$(basename "$xml" | cut -d_ -f1)
-        echo "Looking into http://update.hihonorcdn.com/TDS/data/bl/files/$version/f1/full/$fname"
-        mbn_version=$(uv run -p 3.12.3 update_zip_version_mbn.py "http://update.hihonorcdn.com/TDS/data/bl/files/$version/f1/full/$fname")
+        echo "Looking into https://update.hihonorcdn.com/TDS/data/bl/files/$version/f1/full/$fname"
+        mbn_version=$(uv run -p 3.12.3 update_zip_version_mbn.py "https://update.hihonorcdn.com/TDS/data/bl/files/$version/f1/full/$fname")
         echo "Found version: $mbn_version"
         if [ "x$mbn_version" != 'x' ]; then
             echo "$version $mbn_version http://update.hihonorcdn.com/TDS/data/bl/files/$version/f1/full/$fname" > "${xml}.version_mbn"
