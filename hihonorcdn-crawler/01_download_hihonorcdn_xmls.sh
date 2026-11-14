@@ -22,7 +22,6 @@ worker() {
         if ! (grep '<packageType>' "${path}"); then
             rm -f "${path}"
         fi
-        sleep 0.5
     done
     echo "Worker done ${start}_${end}";
 }
@@ -30,7 +29,6 @@ worker() {
 prev=''
 for thread in `seq $from 20000 $to`; do
     if [ "x$prev" != 'x' ]; then
-	sleep 1.3
         worker $(($prev+1)) $thread &
     fi
     prev=$thread
