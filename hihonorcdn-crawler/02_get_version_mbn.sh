@@ -33,7 +33,7 @@ worker() {
         mbn_version=$(./update_zip_version_mbn.py "http://update.hihonorcdn.com/TDS/data/bl/files/$version/f1/full/$fname")
         if [ "x$mbn_version" != 'x' ]; then
             echo "Found version for $version: $mbn_version"
-            echo "$mbn_version" > "${xml}.version_mbn"
+            echo "$version $mbn_version http://update.hihonorcdn.com/TDS/data/bl/files/$version/f1/full/$fname" > "${xml}.version_mbn"
         fi
         sleep 3
     done
