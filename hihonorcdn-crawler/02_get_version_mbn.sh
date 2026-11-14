@@ -35,13 +35,11 @@ worker() {
             echo "Found version for $version: $mbn_version"
             echo "$version $mbn_version http://update.hihonorcdn.com/TDS/data/bl/files/$version/f1/full/$fname" > "${xml}.version_mbn"
         fi
-        sleep 3
     done
 }
 
 prev=''
 for path in "$SEARCH_DIR"/*; do
-    sleep 1.1
     worker "$path" &
 done
 
