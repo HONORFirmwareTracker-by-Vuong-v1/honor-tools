@@ -4,7 +4,7 @@
 # zip files tails in parallel to get VERSION.mbn which contains the actual version of the update
 #
 # Usage:
-# $ ./get_version_mbn.sh update_hihonorcdn_com_all_860000-900000
+# $ ./get_version_mbn.sh update_hihonorcdn_com_all_000000-400000
 
 SEARCH_DIR="$1"
 [ "x$SEARCH_DIR" != 'x' ] || exit 1
@@ -20,18 +20,28 @@ worker() {
             # The filelist is not about base
             continue
         fi
-        version=$(basename "$xml" | cut -d_ -f1)
-        echo "Looking into https://update.hihonorcdn.com/TDS/data/bl/files/$version/f1/full/$fname"
-        mbn_version=$(uv run -p 3.12.3 update_zip_version_mbn.py "https://update.hihonorcdn.com/TDS/data/bl/files/$version/f1/full/$fname")
-        echo "Found version: $mbn_version"
-        if [ "x$mbn_version" != 'x' ]; then
-            echo "$version $mbn_version http://update.hihonorcdn.com/TDS/data/bl/files/$version/f1/full/$fname" > "${xml}.version_mbn"
+        if [ "x$fname" = 'xupdate_plugin.zip' ]; then
+            # Plugins are not needed
+            continue
         fi
+        if [ "x$(grep -o '<packageType>full</packageType>' "${xml}")" = 'x' ]; then
+            # Skipping non-full updates
+            echo "Skipping non-full: $fname"
+            continue
+        fi
+        version=$(basename "$xml" | cut -d_ -f1)
+        mbn_version=$(./update_zip_version_mbn.py "http://update.hihonorcdn.com/TDS/data/bl/files/$version/f1/full/$fname")
+        if [ "x$mbn_version" != 'x' ]; then
+            echo "Found version for $version: $mbn_version"
+            echo "$mbn_version" > "${xml}.version_mbn"
+        fi
+        sleep 3
     done
 }
 
 prev=''
 for path in "$SEARCH_DIR"/*; do
+    sleep 1.1
     worker "$path" &
 done
 
