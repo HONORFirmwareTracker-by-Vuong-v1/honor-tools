@@ -22,12 +22,6 @@ worker() {
         if ! (grep '<packageType>' "${path}"); then
             rm -f "${path}"
         fi
-        sleep 2.4
-        #path="$d2/v${i}_changelog.xml"
-        #curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/141.0' -so "${path}" http://update.hihonorcdn.com/TDS/data/bl/files/v$i/f1/changelog.xml
-        #if ! (grep -q '<language' "${path}"); then
-        #    rm -f "${path}"
-        #fi
         sleep 0.5
     done
     echo "Worker done ${start}_${end}";
