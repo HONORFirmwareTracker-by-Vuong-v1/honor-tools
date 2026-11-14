@@ -3,8 +3,8 @@
 # Script tries to find all update files on update.hihonorcdn.com (filelist.xml & changelog.xml) and
 # stores those files into update_hihonorcdn_com_all_* directory for further processing
 
-from=880000
-to=940000
+from=920000
+to=980000
 
 d="update_hihonorcdn_com_all"
 
@@ -19,7 +19,7 @@ worker() {
         path="$d2/v${i}_filelist.xml"
         [ ! -f "$path" ] || continue
         curl -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/141.0' -so "${path}" http://update.hihonorcdn.com/TDS/data/bl/files/v$i/f1/full/filelist.xml
-        if ! (grep '<packageType>' "${path}"); then
+        if ! (grep '<packageType>full</packageType>' "${path}"); then
             rm -f "${path}"
         fi
     done
